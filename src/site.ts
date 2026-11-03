@@ -1,9 +1,10 @@
 // SITE SETTINGS — the basic facts about this website, in one place.
 // Change these first when you make the site your own.
 export const site = {
-  name: 'Vibe Code Cambodia',
-  tagline: 'Make a real website by talking to AI.',
+  name: 'Sky Cambodia',
+  tagline: 'Learn how airplanes fly.',
   description:
-    'A hands-on workshop at New Hope Cambodia: build and publish a marketing website by describing it to an AI.',
-  contactEmail: 'dandelion@dandelion.art',
+    'A simple guide to airplanes for students in Cambodia: how planes fly, the kinds of planes, and the airports in Cambodia.',
+  // TODO: put your real email here.
+  contactEmail: 'hello@example.com',
 };
