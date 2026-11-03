@@ -8,138 +8,119 @@ import Footer from '../components/Footer.astro';
 import { site } from '../site';
 
 const stats = [
-  { value: '900 km/h', label: 'how fast a passenger jet flies', labelKm: 'ល្បឿនយន្តហោះដឹកអ្នកដំណើរ' },
-  { value: '11 km', label: 'how high it usually flies', labelKm: 'កម្ពស់ដែលវាហោះជាធម្មតា' },
-  { value: '1903', label: 'the first airplane flight', labelKm: 'ការហោះហើរលើកដំបូងរបស់យន្តហោះ' },
+  { value: '5 am', label: 'we start baking', labelKm: 'យើងចាប់ផ្តើមដុតនំ' },
+  { value: '20+', label: 'kinds of bread and cakes', labelKm: 'ប្រភេទនំប៉័ង និងនំខេក' },
+  { value: '100%', label: 'fresh every day', labelKm: 'ស្រស់រៀងរាល់ថ្ងៃ' },
 ];
 
-const forces = [
+// TODO: change these to your real menu and prices.
+const menu = [
   {
-    icon: '⬆️',
-    title: 'Lift',
-    titleKm: 'កម្លាំងលើក',
-    text: 'The wings push air down, so the air pushes the plane up.',
-    textKm: 'ស្លាបរុញខ្យល់ចុះក្រោម ដូច្នេះខ្យល់រុញយន្តហោះឡើងលើ។',
+    icon: '🥖',
+    title: 'Baguette',
+    titleKm: 'នំប៉័ងបារាំង',
+    price: '$0.50',
+    text: 'Crispy outside, soft inside. Great for nom pang.',
+    textKm: 'ស្រួយនៅខាងក្រៅ ទន់នៅខាងក្នុង។ ល្អសម្រាប់ធ្វើនំប៉័ងសាច់។',
   },
   {
-    icon: '⬇️',
-    title: 'Weight',
-    titleKm: 'ទម្ងន់',
-    text: 'Gravity pulls the plane down to the ground.',
-    textKm: 'ទំនាញផែនដីទាញយន្តហោះចុះមកដី។',
+    icon: '🥐',
+    title: 'Croissant',
+    titleKm: 'នំក្រូសង់',
+    price: '$1.50',
+    text: 'Buttery and flaky. Best with coffee.',
+    textKm: 'មានរសជាតិប៊ឺ និងស្រួយ។ ឆ្ងាញ់បំផុតជាមួយកាហ្វេ។',
   },
   {
-    icon: '➡️',
-    title: 'Thrust',
-    titleKm: 'កម្លាំងរុញ',
-    text: 'The engines push the plane forward.',
-    textKm: 'ម៉ាស៊ីនរុញយន្តហោះទៅមុខ។',
+    icon: '🥥',
+    title: 'Coconut bun',
+    titleKm: 'នំប៉័ងដូង',
+    price: '$0.75',
+    text: 'A soft bun with sweet coconut inside.',
+    textKm: 'នំប៉័ងទន់ មានដូងផ្អែមនៅខាងក្នុង។',
   },
   {
-    icon: '⬅️',
-    title: 'Drag',
-    titleKm: 'កម្លាំងទប់',
-    text: 'The air pushes back against the plane and slows it down.',
-    textKm: 'ខ្យល់រុញទប់យន្តហោះ ហើយធ្វើឱ្យវាយឺត។',
-  },
-];
-
-const planes = [
-  {
-    icon: '✈️',
-    title: 'Passenger jet',
-    titleKm: 'យន្តហោះដឹកអ្នកដំណើរ',
-    text: 'Carries 100 to 500 people between cities and countries.',
-    textKm: 'ដឹកមនុស្សពី ១០០ ទៅ ៥០០ នាក់ រវាងទីក្រុង និងប្រទេស។',
+    icon: '🍩',
+    title: 'Donut',
+    titleKm: 'នំដូណាត់',
+    price: '$0.75',
+    text: 'Fresh and sweet, with sugar or chocolate.',
+    textKm: 'ស្រស់ និងផ្អែម មានស្ករ ឬសូកូឡា។',
   },
   {
-    icon: '📦',
-    title: 'Cargo plane',
-    titleKm: 'យន្តហោះដឹកទំនិញ',
-    text: 'Carries boxes, mail, and goods around the world.',
-    textKm: 'ដឹកប្រអប់ សំបុត្រ និងទំនិញជុំវិញពិភពលោក។',
+    icon: '🎂',
+    title: 'Birthday cake',
+    titleKm: 'នំខួបកំណើត',
+    price: 'from $15',
+    text: 'Order 2 days before. We write your message on top.',
+    textKm: 'កុម្ម៉ង់មុន ២ ថ្ងៃ។ យើងសរសេរពាក្យជូនពររបស់អ្នកនៅលើនំ។',
   },
   {
-    icon: '🛩️',
-    title: 'Small propeller plane',
-    titleKm: 'យន្តហោះតូចមានស្លាបចក្រ',
-    text: 'Has a propeller at the front. Many pilots learn to fly in one.',
-    textKm: 'មានស្លាបចក្រនៅខាងមុខ។ អ្នកបើកយន្តហោះជាច្រើនរៀនហោះជាមួយយន្តហោះប្រភេទនេះ។',
-  },
-  {
-    icon: '🌊',
-    title: 'Seaplane',
-    titleKm: 'យន្តហោះចុះលើទឹក',
-    text: 'Can take off and land on water.',
-    textKm: 'អាចហោះឡើង និងចុះចតលើទឹកបាន។',
-  },
-  {
-    icon: '⚡',
-    title: 'Fighter jet',
-    titleKm: 'យន្តហោះចម្បាំង',
-    text: 'Very fast. Some fly faster than the speed of sound.',
-    textKm: 'លឿនណាស់។ ខ្លះហោះលឿនជាងល្បឿនសំឡេង។',
-  },
-  {
-    icon: '🕊️',
-    title: 'Glider',
-    titleKm: 'យន្តហោះគ្មានម៉ាស៊ីន',
-    text: 'Has no engine. It rides the wind, like a bird.',
-    textKm: 'គ្មានម៉ាស៊ីនទេ។ វាហោះតាមខ្យល់ ដូចសត្វស្លាប។',
+    icon: '☕',
+    title: 'Iced coffee',
+    titleKm: 'កាហ្វេទឹកដោះគោទឹកកក',
+    price: '$1.25',
+    text: 'Cambodian iced coffee with sweet milk.',
+    textKm: 'កាហ្វេទឹកកកខ្មែរ ជាមួយទឹកដោះគោផ្អែម។',
   },
 ];
 
-const airports = [
+const reasons = [
   {
-    title: 'Techo International Airport',
-    titleKm: 'អាកាសយានដ្ឋានអន្តរជាតិតេជោ',
-    place: 'Phnom Penh',
-    placeKm: 'ភ្នំពេញ',
-    text: 'Cambodia’s newest and biggest airport. It opened in 2025.',
-    textKm: 'អាកាសយានដ្ឋានថ្មីបំផុត និងធំបំផុតរបស់កម្ពុជា។ វាបានបើកនៅឆ្នាំ ២០២៥។',
+    icon: '🌅',
+    title: 'Baked every morning',
+    titleKm: 'ដុតរៀងរាល់ព្រឹក',
+    text: 'We start at 5 am, so everything is fresh.',
+    textKm: 'យើងចាប់ផ្តើមម៉ោង ៥ ព្រឹក ដូច្នេះអ្វីៗទាំងអស់ស្រស់។',
   },
   {
-    title: 'Siem Reap–Angkor International Airport',
-    titleKm: 'អាកាសយានដ្ឋានអន្តរជាតិសៀមរាប-អង្គរ',
-    place: 'Siem Reap',
-    placeKm: 'សៀមរាប',
-    text: 'The airport for visiting Angkor Wat. It opened in 2023.',
-    textKm: 'អាកាសយានដ្ឋានសម្រាប់ទស្សនាអង្គរវត្ត។ វាបានបើកនៅឆ្នាំ ២០២៣។',
+    icon: '🧈',
+    title: 'Good ingredients',
+    titleKm: 'គ្រឿងផ្សំល្អ',
+    text: 'Real butter and fresh eggs. No shortcuts.',
+    textKm: 'ប៊ឺពិត និងពងមាន់ស្រស់។ យើងធ្វើយ៉ាងយកចិត្តទុកដាក់។',
   },
   {
-    title: 'Sihanouk International Airport',
-    titleKm: 'អាកាសយានដ្ឋានអន្តរជាតិព្រះសីហនុ',
-    place: 'Preah Sihanouk',
-    placeKm: 'ព្រះសីហនុ',
-    text: 'Near the beaches by the sea.',
-    textKm: 'នៅជិតឆ្នេរសមុទ្រ។',
+    icon: '💵',
+    title: 'Fair prices',
+    titleKm: 'តម្លៃសមរម្យ',
+    text: 'Good bread for every family.',
+    textKm: 'នំប៉័ងល្អសម្រាប់គ្រប់គ្រួសារ។',
   },
+  {
+    icon: '🛵',
+    title: 'Delivery',
+    titleKm: 'ដឹកជញ្ជូន',
+    text: 'Order on Telegram, and we deliver in Phnom Penh.',
+    textKm: 'កុម្ម៉ង់តាម Telegram ហើយយើងដឹកជូននៅភ្នំពេញ។',
+  },
+];
+
+// TODO: put your real address and opening hours here.
+const visit = [
+  { icon: '📍', title: 'Address', titleKm: 'អាសយដ្ឋាន', text: 'Street 123, Phnom Penh', textKm: 'ផ្លូវលេខ ១២៣ ភ្នំពេញ' },
+  { icon: '🕐', title: 'Open', titleKm: 'ម៉ោងបើក', text: 'Every day, 6 am – 8 pm', textKm: 'រៀងរាល់ថ្ងៃ ម៉ោង ៦ ព្រឹក – ៨ យប់' },
+  { icon: '📱', title: 'Telegram', titleKm: 'តេឡេក្រាម', text: 'Message us to order', textKm: 'ផ្ញើសារមកយើងដើម្បីកុម្ម៉ង់' },
 ];
 
 const faqs = [
   {
-    q: 'Who flew the first airplane?',
-    qKm: 'តើនរណាជាអ្នកបើកយន្តហោះដំបូងគេ?',
-    a: 'The Wright brothers, in the USA, in 1903. Their first flight lasted only 12 seconds!',
-    aKm: 'បងប្អូន Wright នៅសហរដ្ឋអាមេរិក ក្នុងឆ្នាំ ១៩០៣។ ការហោះហើរលើកដំបូងរបស់ពួកគេមានរយៈពេលតែ ១២ វិនាទីប៉ុណ្ណោះ!',
+    q: 'Do you deliver?',
+    qKm: 'តើអ្នកដឹកជញ្ជូនទេ?',
+    a: 'Yes, in Phnom Penh. Send us a message on Telegram.',
+    aKm: 'បាទ/ចាស នៅក្នុងភ្នំពេញ។ ផ្ញើសារមកយើងតាម Telegram។',
   },
   {
-    q: 'Why do my ears pop on a plane?',
-    qKm: 'ហេតុអ្វីត្រចៀកខ្ញុំស្ទះពេលជិះយន្តហោះ?',
-    a: 'The air pressure changes when the plane goes up and down. Swallow or yawn to help your ears.',
-    aKm: 'សម្ពាធខ្យល់ប្រែប្រួល ពេលយន្តហោះឡើង និងចុះ។ លេបទឹកមាត់ ឬស្ងាប ដើម្បីជួយត្រចៀករបស់អ្នក។',
+    q: 'Can I order a cake for a party?',
+    qKm: 'តើខ្ញុំអាចកុម្ម៉ង់នំខេកសម្រាប់ពិធីជប់លៀងបានទេ?',
+    a: 'Yes! Please order 2 days before, so we have time to make it.',
+    aKm: 'បាន! សូមកុម្ម៉ង់មុន ២ ថ្ងៃ ដើម្បីឱ្យយើងមានពេលធ្វើវា។',
   },
   {
-    q: 'Is flying safe?',
-    qKm: 'តើការជិះយន្តហោះមានសុវត្ថិភាពទេ?',
-    a: 'Yes. Flying is one of the safest ways to travel. Pilots train for many years, and planes are checked often.',
-    aKm: 'បាទ/ចាស។ ការជិះយន្តហោះជាមធ្យោបាយធ្វើដំណើរមួយដែលមានសុវត្ថិភាពបំផុត។ អ្នកបើកយន្តហោះហ្វឹកហាត់ច្រើនឆ្នាំ ហើយយន្តហោះត្រូវបានពិនិត្យជាញឹកញាប់។',
-  },
-  {
-    q: 'How can I become a pilot?',
-    qKm: 'តើខ្ញុំអាចក្លាយជាអ្នកបើកយន្តហោះដោយរបៀបណា?',
-    a: 'Study hard in math, physics, and English. Then go to a flight school. Training takes about two years.',
-    aKm: 'រៀនឱ្យពូកែគណិតវិទ្យា រូបវិទ្យា និងភាសាអង់គ្លេស។ បន្ទាប់មកចូលរៀននៅសាលាបង្ហាត់បើកយន្តហោះ។ ការហ្វឹកហាត់ចំណាយពេលប្រហែលពីរឆ្នាំ។',
+    q: 'How can I pay?',
+    qKm: 'តើខ្ញុំអាចបង់ប្រាក់ដោយរបៀបណា?',
+    a: 'Cash (dollars or riel) or KHQR.',
+    aKm: 'សាច់ប្រាក់ (ដុល្លារ ឬរៀល) ឬ KHQR។',
   },
 ];
 ---
@@ -150,43 +131,48 @@ const faqs = [
   <main>
     <!-- HERO -->
     <section class="relative overflow-hidden">
-      <div class="pointer-events-none absolute -top-40 -right-40 size-[36rem] rounded-full bg-brand/15 blur-3xl"></div>
-      <div class="pointer-events-none absolute -bottom-40 -left-40 size-[30rem] rounded-full bg-sun/20 blur-3xl"></div>
+      <div class="pointer-events-none absolute -top-40 -right-40 size-[36rem] rounded-full bg-sun/25 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-40 -left-40 size-[30rem] rounded-full bg-brand/15 blur-3xl"></div>
 
       <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2">
         <div>
           <p class="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 px-3 py-1 text-sm font-medium">
             <span class="size-2 rounded-full bg-leaf"></span>
-            A simple guide for students in Cambodia
+            A family bakery in Phnom Penh
           </p>
           <h1 class="mt-6 font-display text-5xl leading-[1.02] font-extrabold tracking-tight text-balance sm:text-6xl lg:text-7xl">
-            How do <span class="text-brand">airplanes</span> fly?
+            Fresh bread, baked with <span class="text-brand">love</span>.
           </h1>
-          <p lang="km" class="mt-4 text-xl text-ink/70">តើយន្តហោះហោះហើរដោយរបៀបណា?</p>
+          <p lang="km" class="mt-4 text-xl text-ink/70">នំប៉័ងស្រស់ ដុតដោយក្តីស្រលាញ់។</p>
           <p class="mt-6 max-w-xl text-lg text-muted">
-            Learn the four forces of flight, the kinds of planes, and the airports in Cambodia.
-            <span class="km" lang="km">រៀនពីកម្លាំងទាំងបួននៃការហោះហើរ ប្រភេទយន្តហោះ និងអាកាសយានដ្ឋាននៅកម្ពុជា។</span>
+            We bake bread, cakes, and pastries every morning. Come and taste!
+            <span class="km" lang="km">យើងដុតនំប៉័ង នំខេក និងនំផ្សេងៗរៀងរាល់ព្រឹក។ សូមអញ្ជើញមកភ្លក់!</span>
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#how" class="rounded-full bg-brand px-6 py-3 font-semibold text-paper shadow-lg shadow-brand/25 transition hover:bg-brand-dark">
-              Start learning ↓ <span lang="km" class="font-khmer font-normal opacity-80">ចាប់ផ្តើមរៀន</span>
+            <a href="#menu" class="rounded-full bg-brand px-6 py-3 font-semibold text-paper shadow-lg shadow-brand/25 transition hover:bg-brand-dark">
+              See our menu ↓ <span lang="km" class="font-khmer font-normal opacity-80">មើលម៉ឺនុយ</span>
             </a>
-            <a href="#planes" class="rounded-full border border-ink/15 bg-white px-6 py-3 font-semibold transition hover:border-ink/40">
-              Types of planes → <span lang="km" class="font-khmer font-normal opacity-60">ប្រភេទយន្តហោះ</span>
+            <a href={site.telegram} class="rounded-full border border-ink/15 bg-white px-6 py-3 font-semibold transition hover:border-ink/40">
+              Order on Telegram → <span lang="km" class="font-khmer font-normal opacity-60">កុម្ម៉ង់</span>
             </a>
           </div>
         </div>
 
-        <!-- Illustration: a plane flying through the sky, past the clouds -->
-        <div class="relative h-72 overflow-hidden rounded-3xl bg-gradient-to-b from-brand to-sky-300 shadow-2xl sm:h-96" aria-hidden="true">
-          <div class="absolute top-6 right-8 size-16 rounded-full bg-sun shadow-[0_0_60px] shadow-sun/70"></div>
-          <div class="absolute top-16 left-6 h-10 w-32 rounded-full bg-white/90"></div>
-          <div class="absolute top-12 left-14 h-12 w-16 rounded-full bg-white/90"></div>
-          <div class="absolute right-10 bottom-14 h-12 w-40 rounded-full bg-white/80"></div>
-          <div class="absolute right-24 bottom-20 h-14 w-20 rounded-full bg-white/80"></div>
-          <div class="absolute bottom-10 left-6 h-8 w-24 rounded-full bg-white/70"></div>
-          <div class="absolute top-[55%] left-[8%] w-[55%] -rotate-12 border-t-4 border-dashed border-white/70"></div>
-          <span class="absolute top-[30%] left-[55%] text-7xl drop-shadow-lg sm:text-8xl">✈️</span>
+        <!-- Illustration: a tray of today's bread -->
+        <div class="relative" aria-hidden="true">
+          <div class="rounded-3xl bg-gradient-to-br from-sun to-brand p-8 shadow-2xl">
+            <div class="grid grid-cols-3 gap-4 text-center text-6xl sm:text-7xl">
+              <span class="rounded-2xl bg-white/25 py-4">🥐</span>
+              <span class="rounded-2xl bg-white/25 py-4">🥖</span>
+              <span class="rounded-2xl bg-white/25 py-4">🍩</span>
+              <span class="rounded-2xl bg-white/25 py-4">🎂</span>
+              <span class="rounded-2xl bg-white/25 py-4">🍞</span>
+              <span class="rounded-2xl bg-white/25 py-4">☕</span>
+            </div>
+          </div>
+          <p class="absolute -bottom-5 left-6 rotate-[-4deg] rounded-full bg-ink px-5 py-2 font-display font-bold text-paper shadow-xl">
+            Fresh today! <span lang="km" class="font-khmer font-normal">ស្រស់ថ្ងៃនេះ!</span>
+          </p>
         </div>
       </div>
     </section>
@@ -209,25 +195,26 @@ const faqs = [
       </dl>
     </section>
 
-    <!-- HOW PLANES FLY -->
-    <section id="how" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28">
-      <p class="font-semibold text-brand">How planes fly <span lang="km" class="font-khmer font-normal">· របៀបដែលយន្តហោះហោះហើរ</span></p>
-      <h2 class="mt-2 max-w-2xl font-display text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
-        Four forces keep a plane in the sky.
-      </h2>
-      <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">កម្លាំងបួនរក្សាយន្តហោះឱ្យនៅលើមេឃ។</p>
-      <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- MENU -->
+    <section id="menu" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28">
+      <p class="font-semibold text-brand">Our menu <span lang="km" class="font-khmer font-normal">· ម៉ឺនុយរបស់យើង</span></p>
+      <h2 class="mt-2 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Something for everyone.</h2>
+      <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">មានអ្វីៗសម្រាប់គ្រប់គ្នា។</p>
+      <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {
-          forces.map((f) => (
-            <li class="rounded-2xl border border-ink/10 bg-white p-6">
-              <span class="text-3xl">{f.icon}</span>
-              <h3 class="mt-4 font-display text-xl font-bold">
-                {f.title}
-                <span class="km text-base" lang="km">{f.titleKm}</span>
+          menu.map((m) => (
+            <li class="rounded-2xl border border-ink/10 bg-white p-6 transition hover:-translate-y-1 hover:border-brand hover:shadow-xl">
+              <div class="flex items-start justify-between">
+                <span class="text-4xl">{m.icon}</span>
+                <span class="rounded-full bg-sun/30 px-3 py-1 font-display font-bold">{m.price}</span>
+              </div>
+              <h3 class="mt-4 font-display text-2xl font-bold">
+                {m.title}
+                <span class="km text-lg" lang="km">{m.titleKm}</span>
               </h3>
               <p class="mt-2 text-muted">
-                {f.text}
-                <span class="km" lang="km">{f.textKm}</span>
+                {m.text}
+                <span class="km" lang="km">{m.textKm}</span>
               </p>
             </li>
           ))
@@ -239,31 +226,37 @@ const faqs = [
     <section class="bg-ink text-paper">
       <div class="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 sm:py-28">
         <p class="font-display text-3xl leading-tight font-bold text-balance sm:text-5xl">
-          When <span class="text-sun">lift is bigger than weight</span>, the plane goes up.
+          The smell of <span class="text-sun">fresh bread</span> is the best way to start the day.
         </p>
         <p lang="km" class="km mt-6 text-xl sm:text-2xl">
-          ពេលកម្លាំងលើកធំជាងទម្ងន់ យន្តហោះឡើងលើ។
+          ក្លិននំប៉័ងស្រស់ គឺជាវិធីល្អបំផុតដើម្បីចាប់ផ្តើមថ្ងៃថ្មី។
         </p>
       </div>
     </section>
 
-    <!-- TYPES OF PLANES -->
-    <section id="planes" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28">
-      <p class="font-semibold text-brand">Types of planes <span lang="km" class="font-khmer font-normal">· ប្រភេទយន្តហោះ</span></p>
-      <h2 class="mt-2 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Many planes, many jobs.</h2>
-      <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">យន្តហោះច្រើនប្រភេទ ការងារច្រើនយ៉ាង។</p>
-      <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <!-- WHY US + ABOUT -->
+    <section id="about" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-28">
+      <p class="font-semibold text-brand">About us <span lang="km" class="font-khmer font-normal">· អំពីយើង</span></p>
+      <h2 class="mt-2 max-w-2xl font-display text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
+        A small family bakery.
+      </h2>
+      <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">ហាងនំប៉័ងគ្រួសារតូចមួយ។</p>
+      <p class="mt-4 max-w-2xl text-lg text-muted">
+        We bake the recipes our family loves, and share them with our neighbors.
+        <span class="km" lang="km">យើងដុតនំតាមរូបមន្តដែលគ្រួសារយើងស្រលាញ់ ហើយចែករំលែកវាជាមួយអ្នកជិតខាង។</span>
+      </p>
+      <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
-          planes.map((p) => (
-            <li class="rounded-2xl border border-ink/10 bg-white p-6 transition hover:-translate-y-1 hover:border-brand hover:shadow-xl">
-              <span class="text-4xl">{p.icon}</span>
-              <h3 class="mt-4 font-display text-2xl font-bold">
-                {p.title}
-                <span class="km text-lg" lang="km">{p.titleKm}</span>
+          reasons.map((r) => (
+            <li class="rounded-2xl border border-ink/10 bg-white p-6">
+              <span class="text-3xl">{r.icon}</span>
+              <h3 class="mt-4 font-display text-xl font-bold">
+                {r.title}
+                <span class="km text-base" lang="km">{r.titleKm}</span>
               </h3>
               <p class="mt-2 text-muted">
-                {p.text}
-                <span class="km" lang="km">{p.textKm}</span>
+                {r.text}
+                <span class="km" lang="km">{r.textKm}</span>
               </p>
             </li>
           ))
@@ -271,33 +264,28 @@ const faqs = [
       </ul>
     </section>
 
-    <!-- AIRPORTS IN CAMBODIA -->
-    <section id="airports" class="scroll-mt-20 bg-white">
+    <!-- VISIT US -->
+    <section id="visit" class="scroll-mt-20 bg-white">
       <div class="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1.4fr]">
         <div>
-          <p class="font-semibold text-brand">In Cambodia <span lang="km" class="font-khmer font-normal">· នៅកម្ពុជា</span></p>
-          <h2 class="mt-2 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Airports in Cambodia</h2>
-          <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">អាកាសយានដ្ឋាននៅកម្ពុជា</p>
-          <p class="mt-4 text-lg text-muted">
-            Planes from many countries land here every day.
-            <span class="km" lang="km">យន្តហោះពីប្រទេសជាច្រើនចុះចតនៅទីនេះរៀងរាល់ថ្ងៃ។</span>
-          </p>
+          <p class="font-semibold text-brand">Visit us <span lang="km" class="font-khmer font-normal">· មកលេងយើង</span></p>
+          <h2 class="mt-2 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Come and say hello.</h2>
+          <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">សូមអញ្ជើញមកលេង។</p>
         </div>
-        <ul class="grid gap-4">
+        <ul class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
           {
-            airports.map((a) => (
-              <li class="rounded-2xl bg-paper p-6">
-                <p class="text-sm font-semibold text-leaf">
-                  📍 {a.place} <span lang="km" class="font-khmer font-normal">· {a.placeKm}</span>
-                </p>
-                <h3 class="mt-2 font-display text-lg font-bold">
-                  {a.title}
-                  <span class="km text-base" lang="km">{a.titleKm}</span>
-                </h3>
-                <p class="mt-1 text-muted">
-                  {a.text}
-                  <span class="km" lang="km">{a.textKm}</span>
-                </p>
+            visit.map((v) => (
+              <li class="flex gap-4 rounded-2xl bg-paper p-6">
+                <span class="text-3xl">{v.icon}</span>
+                <div>
+                  <h3 class="font-display text-lg font-bold">
+                    {v.title} <span lang="km" class="font-khmer font-normal text-muted">· {v.titleKm}</span>
+                  </h3>
+                  <p class="mt-1 text-muted">
+                    {v.text}
+                    <span class="km" lang="km">{v.textKm}</span>
+                  </p>
+                </div>
               </li>
             ))
           }
@@ -333,10 +321,10 @@ const faqs = [
     <!-- CALL TO ACTION -->
     <section id="contact" class="scroll-mt-20 px-4 pb-20 sm:px-6">
       <div class="mx-auto max-w-6xl rounded-3xl bg-brand px-6 py-16 text-center text-paper sm:py-20">
-        <h2 class="font-display text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">Have a question about airplanes?</h2>
-        <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">មានសំណួរអំពីយន្តហោះទេ?</p>
-        <a href={`mailto:${site.contactEmail}`} class="mt-8 inline-block rounded-full bg-paper px-8 py-4 font-semibold text-ink transition hover:bg-sun">
-          Send me a message → <span lang="km" class="font-khmer font-normal">ផ្ញើសារមកខ្ញុំ</span>
+        <h2 class="font-display text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">Hungry? Order now.</h2>
+        <p class="km mt-3 text-xl font-semibold sm:text-2xl" lang="km">ឃ្លានទេ? កុម្ម៉ង់ឥឡូវនេះ។</p>
+        <a href={site.telegram} class="mt-8 inline-block rounded-full bg-paper px-8 py-4 font-semibold text-ink transition hover:bg-sun">
+          Message us on Telegram → <span lang="km" class="font-khmer font-normal">ផ្ញើសារតាម Telegram</span>
         </a>
       </div>
     </section>
