@@ -1,0 +1,168 @@
+---
+// THE MENU PAGE — /menu. Change names and prices in the `groups` list below.
+// The pictures are drawings from src/lib/bakery-art.ts (no photos needed).
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../site';
+import { bakeryArt } from '../lib/bakery-art';
+
+// TODO: these prices are guesses. Change them to your real prices.
+// `bg` is the colour behind each picture.
+const groups = [
+  {
+    title: 'Cakes & sweets',
+    titleKm: 'នំខេក និងនំផ្អែម',
+    items: [
+      { art: 'doughnut', name: 'Doughnut', km: 'នំដូណាត់', price: '$0.75', bg: '#fde2ea' },
+      { art: 'banana-cake', name: 'Banana Cake', km: 'នំខេកចេក', price: '$1.50', bg: '#fff3c4' },
+      { art: 'carrot-cake', name: 'Carrot Cake', km: 'នំខេកការ៉ុត', price: '$2.00', bg: '#ffe0c2' },
+      { art: 'butter-cake', name: 'Butter Cake', km: 'នំខេកប៊ឺ', price: '$1.75', bg: '#fff6d6' },
+      { art: 'brownie', name: 'Chocolate Brownie', km: 'នំប្រោននីសូកូឡា', price: '$1.25', bg: '#ecdccf' },
+    ],
+  },
+  {
+    title: 'Muffins',
+    titleKm: 'នំម៉ាហ្វីន',
+    items: [
+      { art: 'muffin', name: 'Muffin', km: 'នំម៉ាហ្វីន', price: '$1.00', bg: '#fde4e1' },
+      { art: 'chocolate-muffin', name: 'Chocolate Muffin', km: 'នំម៉ាហ្វីនសូកូឡា', price: '$1.25', bg: '#ead9cc' },
+    ],
+  },
+  {
+    title: 'Soft roll buns',
+    titleKm: 'នំប៉័ងទន់',
+    items: [
+      { art: 'egg-bun', name: 'Soft Bun · Egg Filling', km: 'នំប៉័ងទន់ ស្នូលស៊ុត', price: '$0.75', bg: '#fff4c9' },
+      { art: 'pandan-bun', name: 'Soft Bun · Pandan Filling', km: 'នំប៉័ងទន់ ស្នូលស្លឹកតើយ', price: '$0.75', bg: '#e3f1d4' },
+      { art: 'taro-bun', name: 'Soft Bun · Taro Filling', km: 'នំប៉័ងទន់ ស្នូលត្រាវ', price: '$0.75', bg: '#ebe2f7' },
+      { art: 'brioche', name: 'Brioche', km: 'នំប្រីយ៉ូស', price: '$1.50', bg: '#fbe6cc' },
+    ],
+  },
+  {
+    title: 'Savoury',
+    titleKm: 'នំប្រៃ',
+    items: [
+      { art: 'hotdog-bun', name: 'Hotdog Bun', km: 'នំប៉័ងហតដក', price: '$1.00', bg: '#fde3d6' },
+      { art: 'mini-pizza', name: 'Mini Pizza', km: 'ភីហ្សាតូច', price: '$1.50', bg: '#fbe0d0' },
+    ],
+  },
+];
+
+const floaters = ['doughnut', 'muffin', 'brioche', 'mini-pizza', 'egg-bun'];
+---
+
+<Base title="Our Menu" description="The Hungry Bakery menu: doughnuts, cakes, muffins, soft buns, brioche, and mini pizza. Baked fresh every morning.">
+  <Header />
+
+  <main class="overflow-x-clip">
+    <!-- BANNER -->
+    <section class="relative isolate overflow-hidden bg-ink text-paper">
+      <div class="pointer-events-none absolute inset-0 -z-10 opacity-25" aria-hidden="true">
+        {floaters.map((f, i) => <div class={`floater f${i}`} set:html={bakeryArt(f)} />)}
+      </div>
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p class="rise font-medium text-sun" style="--i:0">{site.name}</p>
+        <h1 class="rise mt-2 font-display text-6xl leading-none font-extrabold tracking-tight sm:text-8xl" style="--i:1">
+          Our Menu
+        </h1>
+        <p lang="km" class="rise mt-3 text-2xl font-semibold text-paper/80 sm:text-3xl" style="--i:2">បញ្ជីនំរបស់យើង</p>
+        <p class="rise mt-6 max-w-lg text-lg text-paper/75" style="--i:3">
+          Baked fresh every morning. Order on Telegram, or come and visit!
+          <span class="km" lang="km">ដុតស្រស់រៀងរាល់ព្រឹក។ កុម្ម៉ង់តាម Telegram ឬមកលេងហាងយើង!</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- MENU GROUPS -->
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+      {
+        groups.map((g) => (
+          <section class="mb-16 last:mb-0">
+            <h2 data-reveal class="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+              {g.title}
+              <span class="km text-brand" lang="km">{g.titleKm}</span>
+            </h2>
+            <ul class="mt-6 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+              {g.items.map((m, i) => (
+                <li data-reveal style={`--delay:${(i % 4) * 90}ms`} class="card group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-ink/5">
+                  <div class="art p-3 sm:p-5" style={`background:${m.bg}`} set:html={bakeryArt(m.art, m.name)} />
+                  <div class="p-3 sm:p-4">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="font-display text-base leading-tight font-bold sm:text-lg">{m.name}</h3>
+                      <span class="shrink-0 font-display text-base font-extrabold text-brand sm:text-lg">{m.price}</span>
+                    </div>
+                    <p lang="km" class="mt-1 text-sm text-muted">{m.km}</p>
+                    <p class="mt-1 text-sm tracking-widest text-sun" aria-label="5 stars">★★★★★</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+      <p class="mt-10 text-sm text-muted">
+        Prices may change. Please ask a Khmer teacher to check the Khmer names.
+        <span class="km" lang="km">តម្លៃអាចផ្លាស់ប្តូរ។</span>
+      </p>
+    </div>
+
+    <!-- INFO STRIP -->
+    <section class="bg-ink text-paper">
+      <ul class="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:grid-cols-3 sm:px-6">
+        <li class="flex items-center gap-3">
+          <span class="grid size-11 shrink-0 place-items-center rounded-full bg-paper/10 text-xl">🕐</span>
+          <span><span class="block text-sm text-paper/60">Open every day</span><span class="font-bold">6 AM – 8 PM</span><span class="km" lang="km">បើករៀងរាល់ថ្ងៃ</span></span>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="grid size-11 shrink-0 place-items-center rounded-full bg-paper/10 text-xl">📱</span>
+          <span><span class="block text-sm text-paper/60">Order on</span><a href={site.telegram} class="font-bold underline underline-offset-4 hover:text-sun">Telegram</a><span class="km" lang="km">កុម្ម៉ង់តាម Telegram</span></span>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="grid size-11 shrink-0 place-items-center rounded-full bg-paper/10 text-xl">📍</span>
+          <span><span class="block text-sm text-paper/60">Our place</span><span class="font-bold">Street 123, Phnom Penh</span><span class="km" lang="km">ផ្លូវលេខ ១២៣ ភ្នំពេញ</span></span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* Banner text rises in, one line after another */
+  .rise { animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(var(--i) * 120ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+  /* Drawings floating slowly behind the banner */
+  .floater { position: absolute; width: 11rem; animation: drift 9s ease-in-out infinite alternate; }
+  .f0 { left: 58%; top: 6%; }
+  .f1 { left: 80%; top: 48%; animation-delay: -2s; }
+  .f2 { left: 64%; top: 70%; width: 13rem; animation-delay: -4s; }
+  .f3 { left: 88%; top: -4%; animation-delay: -6s; }
+  .f4 { left: 42%; top: 62%; width: 8rem; animation-delay: -3s; }
+  @keyframes drift { to { transform: translateY(-18px) rotate(6deg); } }
+
+  /* Cards appear when you scroll to them */
+  [data-reveal] { opacity: 0; transform: translateY(28px) scale(0.97); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: var(--delay, 0ms); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+
+  /* Hover: the card lifts and the drawing wiggles */
+  .card { transition: opacity 0.7s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s; }
+  .card.is-in:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -16px rgb(43 29 20 / 0.35); }
+  .art :global(svg) { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .card:hover .art :global(svg) { transform: scale(1.08) rotate(-3deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise, .floater { animation: none; }
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add('is-in'), io.unobserve(e.target))),
+    { rootMargin: '0px 0px -6% 0px' },
+  );
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+</script>
